@@ -1,8 +1,10 @@
 const product = require('./Routes/product');
+const resolver = require('./Resolvers/index');
+const rootSchema = require('./Schemas/index');
 const express = require("express");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
-const { GraphQLSchema, GraphQLString, GraphQLObjectType } = require("graphql");
+const { buildSchema } = require("graphql");
 const port = process.env.PORT || 5000;
 require("dotenv").config();
 const app = express();
@@ -12,20 +14,9 @@ app.use(cors());
 // routes for product
 app.use('/api', product)
 
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: "test",
-    fields: () => ({
-      message: {
-        type: GraphQLString,
-        resolve: ()=> "hello world"
-      }
-    })
-  })
-})
-
 app.use('/graphql', graphqlHTTP({
-  schema,
+  schema : rootSchema,
+  rootValue: resolver,
   graphiql: true,
 }));
 
