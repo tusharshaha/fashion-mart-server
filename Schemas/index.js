@@ -1,3 +1,3 @@
-const BookSchema = require('./BookSchemas');
+const productSchema = require('./productSchemas');
 
-module.exports = BookSchema;
+module.exports = productSchema;
