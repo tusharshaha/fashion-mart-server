@@ -1,4 +1,4 @@
-const { database } = require("../dbconfing/index")
+const { database } = require("../../dbconfing/index")
 const productCollection = database.collection("products");
 
 module.exports = {

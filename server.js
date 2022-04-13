@@ -1,5 +1,5 @@
-const rootResolver = require('./Resolvers/index');
-const rootSchema = require('./Schemas/index');
+const rootResolver = require('./graphql/Resolvers/index');
+const rootSchema = require('./graphql/Schemas/index');
 const express = require("express");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
