@@ -1,5 +1,4 @@
-const product = require('./Routes/product');
-const resolver = require('./Resolvers/index');
+const rootResolver = require('./Resolvers/index');
 const rootSchema = require('./Schemas/index');
 const express = require("express");
 const cors = require("cors");
@@ -9,12 +8,10 @@ const app = express();
 app.use(express.json())
 app.use(cors());
 
-// routes for product
-app.use('/api', product)
 
 app.use('/graphql', graphqlHTTP({
   schema : rootSchema,
-  rootValue: resolver,
+  rootValue: rootResolver,
   graphiql: true,
 }));
 
