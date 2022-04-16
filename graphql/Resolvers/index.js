@@ -1,2 +1,6 @@
-const productResolver = require('./productResolvers')
-module.exports = productResolver;
+const productResolver = require('./productResolvers');
+const userResolver = require('./userResolvers');
+module.exports = {
+    ...productResolver,
+    ...userResolver
+};

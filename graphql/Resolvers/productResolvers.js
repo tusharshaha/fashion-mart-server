@@ -1,5 +1,7 @@
 const { ObjectId } = require("mongodb");
 const { database } = require("../../dbconfing/index")
+
+// create collection for products
 const productCollection = database.collection("products");
 
 module.exports = {
