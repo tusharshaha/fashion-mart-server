@@ -1,6 +1,6 @@
 const bcryptjs = require("bcryptjs");
-const jsonwebtoken = require("jsonwebtoken");
-const { database } = require("../../dbconfing")
+const jwt = require("jsonwebtoken");
+const { database } = require("../../dbconfing");
 // create collection for user
 const userCollection = database.collection("users");
 
@@ -10,27 +10,31 @@ module.exports = {
             const user = args.input;
             const oldUser = await userCollection.findOne({ email: user.email });
             if (oldUser) {
-                throw new Error("User already exist!")
+                throw new Error("User Already Exist!");
             } else {
-                const hashPassword = await bcryptjs.hash(user.password, 6);
-                const newUser = { ...user, password: hashPassword, }
+                const hashPassword = await bcryptjs.hash(user.password, 8);
+                const newUser = { ...user, password: hashPassword };
                 await userCollection.insertOne(newUser);
                 return newUser;
             }
         } catch (err) {
-            throw err
+            throw err;
         }
     },
-    loginUser: async ({email, password}) => {
+    loginUser: async ({ email, password }) => {
         const oldUser = await userCollection.findOne({ email });
-        const isMatch = await bcryptjs.compare(password, oldUser.password)
         if (!oldUser) {
-            throw new Error("User Dosen't exist!")
+            throw new Error("User Dosen't Exist!");
         }
+        const isMatch = await bcryptjs.compare(password, oldUser.password);
         if (!isMatch) {
-            throw new Error("Didn't Match Password")
-
+            throw new Error("Didn't Match Password");
         }
-        return oldUser
+        const token = jwt.sign(
+            { email: oldUser.email },
+            `${process.env.SECRET_KEY}`,
+            { expiresIn: "8h" }
+        );
+        return { ...oldUser, password: null, token, tokenExpiration: "8h" };
     }
 }
