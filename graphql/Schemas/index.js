@@ -7,6 +7,7 @@ module.exports = buildSchema(`
     }
     type RootQuery {
         products: [product]!
+        product (id: ID!): product!
     }
     type RootMutation {
         addNewProduct(product:addProductInput!): product!
@@ -16,10 +17,8 @@ module.exports = buildSchema(`
         name: String!
         prevPrice: Int
         curPrice: Int!
-        stockStatus: String
-        sku: String
+        sku: String!
         rating: Int
-        size: sizes
         description: String!
     }
     type product {
@@ -28,10 +27,10 @@ module.exports = buildSchema(`
         name: String!
         prevPrice: Int
         curPrice: Int!
-        stockStatus: String
-        sku: String
+        stockStatus: String!
+        sku: String!
         rating: Int
-        size: sizes
+        size: [sizes]!
         description: String!
     }
     enum sizes {
