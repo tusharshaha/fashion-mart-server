@@ -14,7 +14,10 @@ module.exports = {
         const result = await productCollection.findOne(query)
         return result
     },
-    addNewProduct: async (args) => {
+    addNewProduct: async (args, req) => {
+        if(!req.isAuth){
+            throw new Error("Unauthorized!")
+        }
         const newProduct = {
             ...args.product,
             size: ["S", "M", "L"],
