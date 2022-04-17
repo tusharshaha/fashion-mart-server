@@ -19,6 +19,7 @@ module.exports = buildSchema(`
         name: String!
         prevPrice: Int
         curPrice: Int!
+        category: String!
         sku: String!
         rating: Int
         description: String!
@@ -51,6 +52,7 @@ module.exports = buildSchema(`
         name: String!
         prevPrice: Int
         curPrice: Int!
+        category: String!
         stockStatus: String!
         sku: String!
         rating: Int
