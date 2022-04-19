@@ -21,7 +21,6 @@ module.exports = buildSchema(`
         curPrice: Int!
         category: String!
         sku: String!
-        rating: Int
         description: String!
     }
     input registerUserInput {
@@ -55,7 +54,6 @@ module.exports = buildSchema(`
         category: String!
         stockStatus: String!
         sku: String!
-        rating: Int
         size: [sizes]!
         description: String!
     }
