@@ -31,6 +31,7 @@ module.exports = buildSchema(`
     }
     type user {
         _id: ID!
+        register: Boolean!
         userName: String!
         userFullName: String
         email: String!

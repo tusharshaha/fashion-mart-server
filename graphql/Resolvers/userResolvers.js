@@ -15,7 +15,7 @@ module.exports = {
                 const hashPassword = await bcryptjs.hash(user.password, 8);
                 const newUser = { ...user, password: hashPassword };
                 await userCollection.insertOne(newUser);
-                return newUser;
+                return {...newUser, register: true};
             }
         } catch (err) {
             throw err;
