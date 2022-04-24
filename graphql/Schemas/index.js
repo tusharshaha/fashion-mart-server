@@ -55,12 +55,6 @@ module.exports = buildSchema(`
         category: String!
         stockStatus: String!
         sku: String!
-        size: [sizes]!
         description: String!
-    }
-    enum sizes {
-        S
-        M
-        L
     }
 `);

@@ -20,7 +20,6 @@ module.exports = {
         }
         const newProduct = {
             ...args.product,
-            size: ["S", "M", "L"],
             stockStatus: "In Stock"
         }
         await productCollection.insertOne(newProduct)
