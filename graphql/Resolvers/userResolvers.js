@@ -13,7 +13,7 @@ module.exports = {
                 throw new Error("User Already Exist!");
             } else {
                 const hashPassword = await bcryptjs.hash(user.password, 8);
-                const newUser = { ...user, password: hashPassword };
+                const newUser = { ...user, password: hashPassword, role: 'user' };
                 await userCollection.insertOne(newUser);
                 return {...newUser, register: true};
             }
