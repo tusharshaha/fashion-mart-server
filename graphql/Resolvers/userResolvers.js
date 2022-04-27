@@ -12,8 +12,9 @@ module.exports = {
             if (oldUser) {
                 throw new Error("User Already Exist!");
             } else {
+                const createdAt = new Date().toISOString().slice(0, 10);
                 const hashPassword = await bcryptjs.hash(user.password, 8);
-                const newUser = { ...user, password: hashPassword, role: 'user' };
+                const newUser = { ...user, password: hashPassword, createdAt, role: 'user' };
                 await userCollection.insertOne(newUser);
                 return {...newUser, register: true};
             }

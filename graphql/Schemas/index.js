@@ -43,6 +43,8 @@ module.exports = buildSchema(`
         userFullName: String
         email: String!
         password: String
+        createdAt: String
+        role: String!
         token: String!
         tokenExpiration: String!
     }
