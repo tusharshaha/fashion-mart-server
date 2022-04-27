@@ -16,7 +16,7 @@ module.exports = {
                 const hashPassword = await bcryptjs.hash(user.password, 8);
                 const newUser = { ...user, password: hashPassword, createdAt, role: 'user' };
                 await userCollection.insertOne(newUser);
-                return {...newUser, register: true};
+                return { ...newUser, register: true };
             }
         } catch (err) {
             throw err;
@@ -37,5 +37,24 @@ module.exports = {
             { expiresIn: "8h" }
         );
         return { ...oldUser, password: null, token, tokenExpiration: "8h" };
+    },
+    makeAdmin: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again")
+        }
+        const requester = req.decodedEmail;
+        if (requester) {
+            const requesterAccount = await userCollection.findOne({ email: requester });
+            if (requesterAccount.role === "admin") {
+                const filter = { email: args.email }
+                const updateDoc = {
+                    $set: {
+                        role: 'admin'
+                    },
+                };
+                await userCollection.updateOne(filter, updateDoc);
+                return true;
+            } else { return false };
+        } else { return false };
     }
 }
