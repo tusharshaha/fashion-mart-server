@@ -3,10 +3,11 @@ const { database } = require("../../dbconfing/index")
 
 // create collection for products
 const productCollection = database.collection("products");
+const orderCollection = database.collection("orders");
 
 module.exports = {
-    products: () => {
-        return productCollection.find({}).toArray();
+    products: async () => {
+        return await productCollection.find({}).toArray();
     },
     product: async (args) => {
         const id = args.id;
@@ -15,8 +16,8 @@ module.exports = {
         return result
     },
     addNewProduct: async (args, req) => {
-        if(!req.isAuth){
-            throw new Error("Unauthorized!")
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again");
         }
         const newProduct = {
             ...args.product,
@@ -24,5 +25,15 @@ module.exports = {
         }
         await productCollection.insertOne(newProduct)
         return newProduct;
+    },
+    orderProduct: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again");
+        }
+        await orderCollection.insertOne(args.input);
+        return true;
+    },
+    getOrder: async () => {
+        return await orderCollection.find({}).toArray();
     }
 }

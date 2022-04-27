@@ -7,12 +7,14 @@ module.exports = buildSchema(`
     }
     type RootQuery {
         products: [product]!
+        getOrders: [getOrder]!
         product (id: ID!): product!
         loginUser (email: String!, password: String!): authUser!
     }
     type RootMutation {
         addNewProduct(product:addProductInput!): product
-        registerUser (input: registerUserInput!): user
+        registerUser(input: registerUserInput!): user
+        orderProduct(input: orderInput): Boolean!
     }
     input addProductInput {
         img: String!
@@ -28,6 +30,26 @@ module.exports = buildSchema(`
         userFullName: String
         email: String!
         password: String!
+    }
+    input orderInput {
+        userEmail: String!
+        date: String!
+        status: String!
+        payment: String!
+        products: [orderedProduct]!
+    }
+    type orderedProduct {
+        pId: ID!
+        pName: String!
+        pPrice: Int!
+        pQty: Int!
+    }
+    type getOrder {
+        userEmail: String!
+        date: String!
+        status: String!
+        payment: String!
+        products: [orderedProduct]!
     }
     type user {
         _id: ID!
