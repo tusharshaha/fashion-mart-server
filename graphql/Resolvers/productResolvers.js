@@ -33,7 +33,13 @@ module.exports = {
         await orderCollection.insertOne(args.input);
         return true;
     },
-    getOrder: async () => {
+    allOrders: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again");
+        }
         return await orderCollection.find({}).toArray();
+    },
+    userOrders: async ({ email }) => {
+        return await orderCollection.findOne({ userEmail: email });
     }
 }

@@ -7,7 +7,8 @@ module.exports = buildSchema(`
     }
     type RootQuery {
         products: [product]!
-        getOrders: [getOrder]
+        allOrders: [getOrder]
+        userOrders(email: String!): [getOrder]
         product (id: ID!): product!
         loginUser (email: String!, password: String!): authUser!
     }
