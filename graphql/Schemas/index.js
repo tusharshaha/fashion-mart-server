@@ -37,7 +37,7 @@ module.exports = buildSchema(`
         userEmail: String!
         userName: String!
         userPhone: String!
-        company: String!
+        company: String
         address: String!
         country: String!
         city: String!
@@ -65,7 +65,7 @@ module.exports = buildSchema(`
         userEmail: String!
         userName: String!
         userPhone: String!
-        company: String!
+        company: String
         address: String!
         country: String!
         city: String!
