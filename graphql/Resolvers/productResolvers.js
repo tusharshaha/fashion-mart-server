@@ -39,7 +39,7 @@ module.exports = {
         }
         return await orderCollection.find({}).toArray();
     },
-    userOrders: async ({ email }) => {
-        return await orderCollection.findOne({ userEmail: email });
+    userOrders: ({ email }) => {
+        return orderCollection.find({ userEmail: email }).toArray();
     }
 }
