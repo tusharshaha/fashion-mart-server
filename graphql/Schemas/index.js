@@ -44,7 +44,8 @@ module.exports = buildSchema(`
         date: String!
         status: String!
         payment: String!
-        total: Int!
+        totalAmount: Int!
+        totalQty: Int!
         products: [orderedProduct]!
     }
     input orderedProduct {
@@ -71,7 +72,8 @@ module.exports = buildSchema(`
         date: String!
         status: String!
         payment: String!
-        total: Int!
+        totalAmount: Int!
+        totalQty: Int!
         products: [orderProduct]!
     }
     type user {
