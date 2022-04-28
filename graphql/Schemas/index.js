@@ -59,6 +59,7 @@ module.exports = buildSchema(`
         pQty: Int!
     }
     type getOrder {
+        _id: ID!
         userEmail: String!
         userName: String!
         userPhone: String!
