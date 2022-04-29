@@ -38,6 +38,28 @@ module.exports = {
         );
         return { ...oldUser, password: null, token, tokenExpiration: "8h" };
     },
+    updateUserAccount: async (args) => {
+        const { userName, userFullName, email, password, oldP } = args.input;
+        const oldUser = await userCollection.findOne({ email });
+        const isMatch = await bcryptjs.compare(oldP, oldUser.password);
+        if (!isMatch) {
+            throw new Error("Didn't match password!")
+        }
+        try {
+            const hashPassword = await bcryptjs.hash(password, 8);
+            const updateDoc = {
+                $set: {
+                    userName,
+                    userFullName,
+                    password: hashPassword
+                }
+            }
+            await userCollection.updateOne({ email }, updateDoc);
+            return await userCollection.findOne({ email });
+        } catch (err) {
+            throw err
+        }
+    },
     makeAdmin: async (args, req) => {
         if (!req.isAuth) {
             throw new Error("Your Session Expired. Please Login again")
