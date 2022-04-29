@@ -38,6 +38,12 @@ module.exports = {
         );
         return { ...oldUser, password: null, token, tokenExpiration: "8h" };
     },
+    allUsers: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again")
+        }
+        return await userCollection.find({}).toArray();
+    },
     updateUserAccount: async (args) => {
         const { userName, userFullName, email, password, oldP } = args.input;
         const oldUser = await userCollection.findOne({ email });

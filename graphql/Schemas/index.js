@@ -9,6 +9,7 @@ module.exports = buildSchema(`
         products: [product]!
         allOrders: [getOrder]
         userOrders(email: String!): [getOrder]
+        allUsers: [user]
         product (id: ID!): product!
         loginUser (email: String!, password: String!): authUser!
     }
@@ -80,7 +81,7 @@ module.exports = buildSchema(`
     }
     type user {
         _id: ID!
-        register: Boolean!
+        register: Boolean
         userName: String!
         userFullName: String
         email: String!
