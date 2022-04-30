@@ -15,10 +15,10 @@ module.exports = buildSchema(`
     }
     type RootMutation {
         addNewProduct(product:addProductInput!): product
-        orderProduct(input: orderInput!): Boolean
+        orderProduct(input: orderInput!): Boolean!
         registerUser(input: registerUserInput!): user
         updateUserAccount(input: registerUserInput!): authUser!
-        makeAdmin(email: String!): Boolean
+        makeAdmin(email: String!): Boolean!
     }
     input addProductInput {
         img: String!
@@ -59,12 +59,6 @@ module.exports = buildSchema(`
         subTotal: Int!
         qty: Int!
     }
-    type orderProduct {
-        pId: ID!
-        pName: String!
-        pPrice: Int!
-        pQty: Int!
-    }
     type getOrder {
         _id: ID!
         userEmail: String!
@@ -80,6 +74,14 @@ module.exports = buildSchema(`
         totalAmount: Int!
         totalQty: Int!
         products: [orderProduct]!
+    }
+    type orderProduct {
+        id: ID!
+        img: String!
+        name: String!
+        curPrice: Int!
+        subTotal: Int!
+        qty: Int!
     }
     type user {
         _id: ID!
