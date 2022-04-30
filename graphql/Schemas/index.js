@@ -15,10 +15,10 @@ module.exports = buildSchema(`
     }
     type RootMutation {
         addNewProduct(product:addProductInput!): product
-        orderProduct(input: orderInput!): Boolean!
+        orderProduct(input: orderInput!): Boolean
         registerUser(input: registerUserInput!): user
         updateUserAccount(input: registerUserInput!): authUser!
-        makeAdmin(email: String!): Boolean!
+        makeAdmin(email: String!): Boolean
     }
     input addProductInput {
         img: String!
