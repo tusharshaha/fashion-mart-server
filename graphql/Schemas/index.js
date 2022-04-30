@@ -52,10 +52,12 @@ module.exports = buildSchema(`
         products: [orderedProduct]!
     }
     input orderedProduct {
-        pId: ID!
-        pName: String!
-        pPrice: Int!
-        pQty: Int!
+        id: ID!
+        img: String!
+        name: String!
+        curPrice: Int!
+        subTotal: Int!
+        qty: Int!
     }
     type orderProduct {
         pId: ID!

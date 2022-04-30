@@ -25,7 +25,7 @@ module.exports = {
     loginUser: async ({ email, password }) => {
         const oldUser = await userCollection.findOne({ email });
         if (!oldUser) {
-            throw new Error("User Dosen't Exist!");
+            throw new Error("User Dosen't Exists!");
         }
         const isMatch = await bcryptjs.compare(password, oldUser.password);
         if (!isMatch) {
