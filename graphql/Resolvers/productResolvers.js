@@ -42,8 +42,21 @@ module.exports = {
     userOrders: async ({ email }) => {
         return await orderCollection.find({ userEmail: email }).toArray();
     },
-    deleteOrder: async ({id}) => {
-        const query = {_id: ObjectId(id)}
+    changeOrderStatus: async ({id, status}, req) => {
+        if(!req.isAuth){
+            throw new Error("Your Session Expired. Please Login again");
+        }
+        const query = {_id: ObjectId(id)};
+        const updateDoc = {
+            $set: {
+                status
+            }
+        }
+        await orderCollection.updateOne(query, updateDoc);
+        return true;
+    },
+    deleteOrder: async ({ id }) => {
+        const query = { _id: ObjectId(id) }
         await orderCollection.deleteOne(query);
         return true;
     }

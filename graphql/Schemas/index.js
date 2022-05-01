@@ -19,6 +19,7 @@ module.exports = buildSchema(`
         registerUser(input: registerUserInput!): user
         updateUserAccount(input: registerUserInput!): authUser!
         makeAdmin(email: String!): Boolean!
+        changeOrderStatus(id: ID!, status: String!): Boolean!
         deleteOrder(id: ID!): Boolean!
     }
     input addProductInput {
