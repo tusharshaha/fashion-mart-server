@@ -90,6 +90,7 @@ module.exports = buildSchema(`
         register: Boolean
         userName: String!
         userFullName: String
+        role: String
         email: String!
         password: String
     }
