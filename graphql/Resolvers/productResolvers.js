@@ -41,5 +41,10 @@ module.exports = {
     },
     userOrders: async ({ email }) => {
         return await orderCollection.find({ userEmail: email }).toArray();
+    },
+    deleteOrder: async ({id}) => {
+        const query = {_id: ObjectId(id)}
+        await orderCollection.deleteOne(query);
+        return true;
     }
 }
