@@ -66,7 +66,7 @@ module.exports = {
             throw err
         }
     },
-    makeAdmin: async (args, req) => {
+    updateUserRole: async (args, req) => {
         if (!req.isAuth) {
             throw new Error("Your Session Expired. Please Login again")
         }
@@ -77,12 +77,20 @@ module.exports = {
                 const filter = { email: args.email }
                 const updateDoc = {
                     $set: {
-                        role: 'admin'
+                        role: args.role
                     },
                 };
                 await userCollection.updateOne(filter, updateDoc);
                 return true;
             } else { return false };
         } else { return false };
+    },
+    deleteUser: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error("Your Session Expired. Please Login again")
+        }
+        const query = { email: args.email };
+        await userCollection.deleteOne(query);
+        return true;
     }
 }
