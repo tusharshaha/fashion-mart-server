@@ -1,6 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { database } = require("../../dbconfing");
+const { database } = require("../../dbConfig/index");
 // create collection for user
 const userCollection = database.collection("users");
 
