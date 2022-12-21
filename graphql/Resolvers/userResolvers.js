@@ -34,7 +34,7 @@ module.exports = {
         const token = jwt.sign(
             { email: oldUser.email },
             `${process.env.SECRET_KEY}`,
-            { expiresIn: "8h" }
+            { expiresIn: "7d" }
         );
         return { ...oldUser, password: null, token, tokenExpiration: "8h" };
     },
