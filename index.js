@@ -6,14 +6,18 @@ const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const port = process.env.PORT || 5000;
 const app = express();
-app.use(express.json());
-app.use(cors());
 
-// verify every incomming request
-app.use(verifyToken);
+const middleware = [
+  // verify every incomming request
+  verifyToken,
+  cors({ origin: "*", credentials: true }),
+  express.json({ limit: "10mb" }),
+  express.urlencoded({ limit: "10mb", extended: true })
+]
+app.use(middleware);
 
 app.use('/graphql', graphqlHTTP({
-  schema : rootSchema,
+  schema: rootSchema,
   rootValue: rootResolver,
   graphiql: true,
 }));
